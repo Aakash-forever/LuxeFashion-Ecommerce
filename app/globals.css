@@ -138,3 +138,11 @@
 body{
   font-family: 'Source Sans 3', sans-serif;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}

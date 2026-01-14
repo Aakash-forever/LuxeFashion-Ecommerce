@@ -23,7 +23,7 @@ export default function LayoutTextFlip({
 
       <span className="text-7xl font-bold">{text}</span>
 
-      <span className="relative inline-flex overflow-hidden rounded-md bg-gray-800 px-4 py-2 text-slate-200">
+      <span className="relative inline-flex overflow-hidden rounded-md  px-1 py-2 text-[#4A3728]">
         <AnimatePresence mode="wait">
           <motion.span
             key={words[index]}
