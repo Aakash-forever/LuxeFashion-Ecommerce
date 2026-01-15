@@ -2,16 +2,11 @@
 
 import Image from "next/image";
 
-function ProductCard({ product }) {
-  const imageSrc =
-    product?.thumbnail ??
-    product?.image ??
-    "/placeholder.jpg";
+function ProductCard({ product, onClick }) {
+  const imageSrc = product?.thumbnail ?? product?.image ?? "/placeholder.jpg";
 
   const title =
-    typeof product?.title === "string"
-      ? product.title
-      : "Untitled Product";
+    typeof product?.title === "string" ? product.title : "Untitled Product";
 
   const description =
     typeof product?.disc === "string" && product.disc.trim().length > 0
@@ -28,6 +23,7 @@ function ProductCard({ product }) {
 
   return (
     <div
+      onClick={() => onClick(product)}
       className="w-72 rounded-2xl bg-slate-50 overflow-hidden
       shadow-[0_10px_30px_rgba(0,0,0,0.14)]
       hover:shadow-[0_18px_50px_rgba(0,0,0,0.22)]
@@ -48,21 +44,15 @@ function ProductCard({ product }) {
           {title}
         </h3>
 
-        <p className="text-sm text-gray-600 line-clamp-2">
-          {description}
-        </p>
+        <p className="text-sm text-gray-600 line-clamp-2">{description}</p>
 
         <div className="flex items-center gap-1 text-yellow-500 text-sm">
           ★★★★☆
-          <span className="ml-2 text-gray-500">
-            {rating}
-          </span>
+          <span className="ml-2 text-gray-500">{rating}</span>
         </div>
 
         <div className="flex items-center justify-between pt-2">
-          <span className="text-xl font-bold text-gray-900">
-            ₹{price}
-          </span>
+          <span className="text-xl font-bold text-gray-900">₹{price}</span>
 
           <button
             type="button"

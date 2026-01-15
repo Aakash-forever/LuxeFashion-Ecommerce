@@ -3,7 +3,6 @@ import "./globals.css";
 import Navbar from "./layout-components/Navbar";
 import Footer from "./layout-components/Footer";
 
-
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -16,6 +15,12 @@ const geistMono = Geist_Mono({
     display: "swap"
 
 });
+
+export const metadata = {
+  title: "LuxeFashion | Premium Fashion & Modern Style",
+  description:
+    "LuxeFashion is a premium fashion destination offering modern, elegant, and trend-driven clothing designed for everyday luxury and timeless style.",
+};
 
 export default function RootLayout({ children }) {
   return (

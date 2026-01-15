@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import Lenis from "lenis";
 import ProductCard from "@/components/ui/productCard";
 import ReviewsCard from "@/components/ui/reviewsCard";
+import PreviewCard from "@/components/ui/previewCard";
+import Link from "next/link";
 
 const LayoutTextFlip = dynamic(
   () => import("@/components/ui/layout-text-flip.client"),
@@ -15,50 +17,47 @@ export default function Home() {
   const bgRef = useRef(null);
   const sliderRef = useRef(null);
   const speedRef = useRef(100);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
-useEffect(() => {
-  if (bgRef.current) {
-    bgRef.current.style.transform = "translate3d(0, 0, 0)";
-  }
-}, []);
-
-
- useEffect(() => {
-  const lenis = new Lenis({
-    lerp: 0.1,
-    smoothWheel: true,
-    autoRaf: false,
-  });
-
-  let rafId;
-  let scrollY = 0;
-
-  lenis.on("scroll", ({ scroll }) => {
-    scrollY = scroll;
-  });
-
-  lenis.raf(0);
-
-  const raf = (time) => {
-    lenis.raf(time);
-
+  useEffect(() => {
     if (bgRef.current) {
-      bgRef.current.style.transform = `translate3d(0, ${
-        scrollY * 0.3
-      }px, 0)`;
+      bgRef.current.style.transform = "translate3d(0, 0, 0)";
     }
+  }, []);
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      lerp: 0.1,
+      smoothWheel: true,
+      autoRaf: false,
+    });
+
+    let rafId;
+    let scrollY = 0;
+
+    lenis.on("scroll", ({ scroll }) => {
+      scrollY = scroll;
+    });
+
+    lenis.raf(0);
+
+    const raf = (time) => {
+      lenis.raf(time);
+
+      if (bgRef.current) {
+        bgRef.current.style.transform = `translate3d(0, ${scrollY * 0.3}px, 0)`;
+      }
+
+      rafId = requestAnimationFrame(raf);
+    };
 
     rafId = requestAnimationFrame(raf);
-  };
 
-  rafId = requestAnimationFrame(raf);
-
-  return () => {
-    cancelAnimationFrame(rafId);
-    lenis.destroy();
-  };
-}, []);
-
+    return () => {
+      cancelAnimationFrame(rafId);
+      lenis.destroy();
+    };
+  }, []);
 
   useEffect(() => {
     const slider = sliderRef.current;
@@ -130,6 +129,7 @@ useEffect(() => {
       image: "/mens-trending.jpg",
       price: "1299",
       rating: "4.5",
+      sizes: ["S", "M", "L", "XL"],
       disc: "Relaxed fit streetwear shirt with premium cotton fabric.",
     },
     {
@@ -138,6 +138,8 @@ useEffect(() => {
       image: "/womens-trending.webp",
       price: "2199",
       rating: "4.6",
+      sizes: ["S", "M", "L", "XL"],
+
       disc: "Lightweight floral dress perfect for summer outings.",
     },
     {
@@ -146,6 +148,8 @@ useEffect(() => {
       image: "/watch-trending.jpg",
       price: "4999",
       rating: "4.8",
+      sizes: ["S", "M", "L", "XL"],
+
       disc: "Elegant luxury watch with stainless steel strap.",
     },
     {
@@ -154,6 +158,8 @@ useEffect(() => {
       image: "/glasses-trending.jpg",
       price: "1599",
       rating: "4.4",
+      sizes: ["S", "M", "L", "XL"],
+
       disc: "UV-protected premium sunglasses with modern design.",
     },
     {
@@ -162,6 +168,8 @@ useEffect(() => {
       image: "/tshirt-trending.jpg",
       price: "2499",
       rating: "4.7",
+      sizes: ["S", "M", "L", "XL"],
+
       disc: "Trendy oversized t-shirt with soft fleece interior.",
     },
     {
@@ -170,6 +178,8 @@ useEffect(() => {
       image: "/sneakers-trending.jpg",
       price: "3199",
       rating: "4.6",
+      sizes: ["S", "M", "L", "XL"],
+
       disc: "Comfortable everyday sneakers with breathable design.",
     },
   ];
@@ -225,28 +235,30 @@ useEffect(() => {
             individuality.
           </p>
 
-          <button className="group relative overflow-hidden rounded-xl bg-[#d4af37] px-7 py-4 mt-5 text-black font-semibold shadow-lg w-fit">
-            <span className="relative z-10 flex items-center gap-3">
-              Shop Now
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={1.5}
-                width={20}
-                height={20}
-                className="transition-transform group-hover:translate-x-1.5 duration-300"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M13.5 4.5L21 12L13.5 19.5M21 12H3"
-                />
-              </svg>
-            </span>
-            <span className="absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-          </button>
+          <Link href={"/shop"}>
+            <button className="group relative overflow-hidden rounded-xl bg-[#d4af37] px-7 py-4 mt-5 text-black font-semibold shadow-lg w-fit">
+              <span className="relative z-10 flex items-center gap-3">
+                Shop Now
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={1.5}
+                  width={20}
+                  height={20}
+                  className="transition-transform group-hover:translate-x-1.5 duration-300"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 4.5L21 12L13.5 19.5M21 12H3"
+                  />
+                </svg>
+              </span>
+              <span className="absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+            </button>
+          </Link>
 
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white">
             <svg
@@ -321,10 +333,14 @@ useEffect(() => {
               key={product.id}
               className=" min-w-75 min-h-90 py-5 transition-transform duration-300 hover:scale-105"
             >
-              <ProductCard product={product} />
+              <ProductCard product={product} onClick={setSelectedProduct} />
             </div>
           ))}
         </div>
+        <PreviewCard
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+        />
       </section>
 
       <section className="min-h-screen p-10 font-['Source Sans 3']">
