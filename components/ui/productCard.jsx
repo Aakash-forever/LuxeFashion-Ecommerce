@@ -1,9 +1,11 @@
 "use client";
 
+import { useCart } from "@/app/cart/cartContext";
 import Image from "next/image";
 
 function ProductCard({ product, onClick }) {
-  const imageSrc = product?.thumbnail ?? product?.image ?? "/placeholder.jpg";
+
+  const image = product?.thumbnail ?? product?.image ?? "/placeholder.jpg";
 
   const title =
     typeof product?.title === "string" ? product.title : "Untitled Product";
@@ -14,11 +16,11 @@ function ProductCard({ product, onClick }) {
       : "Premium quality product";
 
   const rating = Number.isFinite(Number(product?.rating))
-    ? Number(product.rating).toFixed(1)
+    ? Number(product.rating)
     : "4.0";
 
   const price = Number.isFinite(Number(product?.price))
-    ? Number(product.price).toLocaleString("en-IN")
+    ? Math.floor(Number(product.price))
     : "999";
 
   return (
@@ -31,7 +33,7 @@ function ProductCard({ product, onClick }) {
     >
       <div className="relative w-full h-[240px]">
         <Image
-          src={imageSrc}
+          src={image}
           alt={title}
           fill
           className="object-cover"

@@ -2,18 +2,20 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./layout-components/Navbar";
 import Footer from "./layout-components/Footer";
+import { CartProvider } from "./cart/cartContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap"
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
-    display: "swap"
-
+  display: "swap",
 });
 
 export const metadata = {
@@ -33,9 +35,22 @@ export default function RootLayout({ children }) {
           fetchPriority="high"
         />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Navbar />
-        {children}
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <CartProvider>
+          <Navbar />
+          {children}
+
+          <ToastContainer
+            position="top-center"
+            autoClose={3000}
+            hideProgressBar
+            newestOnTop
+            closeOnClick
+            pauseOnHover
+          />
+        </CartProvider>
         <Footer />
       </body>
     </html>

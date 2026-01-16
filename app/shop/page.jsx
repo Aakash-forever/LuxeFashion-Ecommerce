@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import dummyData from "../dummyData";
 import ProductCard from "@/components/ui/productCard";
+import PreviewCard from "@/components/ui/previewCard";
 
 const Page = () => {
   const CATEGORIES = [
@@ -11,9 +12,10 @@ const Page = () => {
     { label: "Men Shoes", value: "mens-shoes" },
     { label: "Women Bags", value: "womens-bags" },
   ];
-  
+
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const filterCategory = async (categoryValue) => {
     setLoading(true);
@@ -50,21 +52,31 @@ const Page = () => {
           ))}
         </div>
 
-        {loading && <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
-  <div className="h-10 w-10 rounded-full border-4 border-gray-300 border-t-black animate-spin"></div>
-</div>
-}
+        {loading && (
+          <div className="fixed inset-0 flex items-center justify-center bg-white z-50">
+            <div className="h-10 w-10 rounded-full border-4 border-gray-300 border-t-black animate-spin"></div>
+          </div>
+        )}
 
         <div className="grid grid-cols-4 gap-x-6 gap-y-10 my-10">
           {products.map((product) => (
-            <div
+            <ProductCard
               key={product.id}
-            >
-            <ProductCard product={{...product, price: product.price*100}}/>
-            </div>
+              product={{
+                ...product,
+                price: product.price * 100,
+                sizes: ["S", "M", "L", "XL"],
+              }}
+              onClick={setSelectedProduct}
+            />
           ))}
         </div>
       </div>
+
+      <PreviewCard
+        product={selectedProduct}
+        onClose={() => setSelectedProduct(null)}
+      />
     </section>
   );
 };

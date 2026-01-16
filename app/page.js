@@ -304,7 +304,7 @@ export default function Home() {
               <div className="absolute inset-0 bg-black/30" />
 
               <div className="relative z-10">
-                <h3 className="text-3xl font-bold backdrop-blur-sm rounded-xl">
+                <h3 className="text-3xl font-bold  rounded-xl">
                   {item.title}
                 </h3>
                 <p>{item.desc}</p>
