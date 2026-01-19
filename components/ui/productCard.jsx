@@ -1,6 +1,4 @@
 "use client";
-
-import { useCart } from "@/app/cart/cartContext";
 import Image from "next/image";
 
 function ProductCard({ product, onClick }) {

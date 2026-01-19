@@ -19,11 +19,12 @@ export default function LayoutTextFlip({
   }, [duration, words.length]);
 
   return (
-    <span className="inline-flex items-center gap-3">
+    <span className="inline-flex items-center gap-2">
+      <span className="font-bold leading-tight text-3xl sm:text-4xl lg:text-7xl">
+        {text}
+      </span>
 
-      <span className="text-7xl font-bold">{text}</span>
-
-      <span className="relative inline-flex overflow-hidden rounded-md  px-1 py-2 text-[#4A3728]">
+      <span className="relative inline-flex overflow-hidden rounded-md px-1 py-2 text-[#4A3728]">
         <AnimatePresence mode="wait">
           <motion.span
             key={words[index]}
@@ -31,7 +32,9 @@ export default function LayoutTextFlip({
             animate={{ y: "0%", opacity: 1, filter: "blur(0px)" }}
             exit={{ y: "-100%", opacity: 0, filter: "blur(8px)" }}
             transition={{ duration: 0.45, ease: "easeOut" }}
-            className="inline-block text-7xl font-bold whitespace-nowrap"
+            className="inline-block font-bold whitespace-nowrap leading-tight
+                       text-4xl sm:text-5xl lg:text-7xl
+                       min-w-[9ch] sm:min-w-[10ch] lg:min-w-[11ch]"
           >
             {words[index]}
           </motion.span>
