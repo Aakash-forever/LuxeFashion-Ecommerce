@@ -6,6 +6,7 @@ import { CartProvider } from "./cart/cartContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Providers from "./providers";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default function RootLayout({ children }) {
         </Providers>
 
         <Footer />
+        <SpeedInsights />
       </body>
     </html>
   );
