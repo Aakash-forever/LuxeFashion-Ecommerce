@@ -16,12 +16,11 @@ export default function CartPage() {
 
   const subtotal = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
-    0
+    0,
   );
 
   const handleCheckout = () => {
     toast.success("🎉 Order placed successfully!");
-
     clearCart();
   };
 
@@ -29,23 +28,7 @@ export default function CartPage() {
     return (
       <section className="min-h-screen bg-gray-100 flex items-center justify-center px-6">
         <div className="bg-white p-12 rounded-3xl shadow-lg text-center max-w-md w-full">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="w-16 h-16 mx-auto text-gray-400 mb-6"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75"
-            />
-          </svg>
-
           <h2 className="text-2xl font-bold mb-2">Your cart is empty</h2>
-
           <p className="text-gray-600 mb-6">
             Looks like you haven’t added anything yet.
           </p>
@@ -62,17 +45,19 @@ export default function CartPage() {
   }
 
   return (
-    <section className="min-h-screen bg-gray-100 px-10 py-20">
-      <h1 className="text-5xl font-bold mb-12">Your Cart</h1>
+    <section className="min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-10 py-12 sm:py-20">
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-8 sm:mb-12">
+        Your Cart
+      </h1>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10">
         <div className="lg:col-span-2 space-y-6">
           {cartItems.map((item) => (
             <div
-              key={item.id}
-              className="flex gap-6 bg-white p-5 rounded-2xl shadow-lg"
+              key={`${item.id}-${item.size}`}
+              className="flex flex-col sm:flex-row gap-4 sm:gap-6 bg-white p-4 sm:p-5 rounded-2xl shadow-lg"
             >
-              <div className="relative w-28 h-32 shrink-0">
+              <div className="relative w-full sm:w-28 h-40 sm:h-32 shrink-0">
                 <Image
                   src={item.image || "/placeholder.jpg"}
                   alt={item.title}
@@ -82,17 +67,19 @@ export default function CartPage() {
               </div>
 
               <div className="flex-1 space-y-2">
-                <h3 className="text-lg font-semibold">{item.title}</h3>
+                <h3 className="text-base sm:text-lg font-semibold">
+                  {item.title}
+                </h3>
 
                 <p className="text-sm text-gray-500">Size: {item.size}</p>
 
                 <p className="font-bold">₹{Math.floor(item.price)}</p>
 
-                <div className="flex items-center gap-4 mt-3">
-                  <div className="flex items-center border rounded-lg overflow-hidden">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 mt-3">
+                  <div className="flex items-center border rounded-lg overflow-hidden w-fit">
                     <button
                       onClick={() => decreaseQuantity(item.id, item.size)}
-                      className="px-3 py-1 hover:bg-gray-100"
+                      className="px-4 py-2 hover:bg-gray-100"
                     >
                       −
                     </button>
@@ -101,7 +88,7 @@ export default function CartPage() {
 
                     <button
                       onClick={() => increaseQuantity(item.id, item.size)}
-                      className="px-3 py-1 hover:bg-gray-100"
+                      className="px-4 py-2 hover:bg-gray-100"
                     >
                       +
                     </button>
@@ -109,7 +96,7 @@ export default function CartPage() {
 
                   <button
                     onClick={() => removeItem(item.id, item.size)}
-                    className="text-sm font-semibold text-red-500 hover:underline"
+                    className="text-sm font-semibold text-red-500 hover:underline w-fit"
                   >
                     Remove
                   </button>
@@ -119,8 +106,8 @@ export default function CartPage() {
           ))}
         </div>
 
-        <div className="bg-white p-6 rounded-2xl shadow-sm h-fit">
-          <h2 className="text-2xl font-bold mb-6">Order Summary</h2>
+        <div className="bg-white p-5 sm:p-6 rounded-2xl shadow-sm h-fit">
+          <h2 className="text-xl sm:text-2xl font-bold mb-6">Order Summary</h2>
 
           <div className="flex justify-between mb-3">
             <span>Subtotal</span>

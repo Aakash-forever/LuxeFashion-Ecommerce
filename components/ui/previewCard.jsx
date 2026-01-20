@@ -57,18 +57,18 @@ export default function PreviewCard({ product, onClose }) {
       <div className="bg-white w-[90%] max-w-4xl rounded-2xl p-6 relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-2xl font-bold cursor-pointer"
+          className="absolute top-2 right-2 text-2xl font-bold cursor-pointer"
         >
           ✕
         </button>
 
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid md:grid-cols-2 gap-4">
           <div className="relative h-96 w-full">
             <Image
               src={image}
               alt={title}
               fill
-              className="object-cover rounded-xl"
+              className="object-cover rounded-xl p-2"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>

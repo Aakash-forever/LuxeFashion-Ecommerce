@@ -7,6 +7,7 @@ import ProductCard from "@/components/ui/productCard";
 import ReviewsCard from "@/components/ui/reviewsCard";
 import PreviewCard from "@/components/ui/previewCard";
 import Link from "next/link";
+import Image from "next/image";
 
 const LayoutTextFlip = dynamic(
   () => import("@/components/ui/layout-text-flip.client"),
@@ -247,80 +248,93 @@ export default function Home() {
   return (
     <>
       <section className="relative h-screen overflow-hidden">
-        <div
-          ref={bgRef}
-          className="absolute inset-0 -z-20 
-             bg-[url('/hero-img.png')] 
-             bg-cover 
-             bg-left sm:bg-top-right
-             will-change-transform transform-gpu"
-        />
+  <div
+    ref={bgRef}
+    className="absolute inset-0 -z-20 
+      bg-[url('/hero-img.png')] 
+      bg-cover bg-center sm:bg-top-right
+      will-change-transform transform-gpu"
+  />
 
-        <div className="absolute inset-0 -z-10 bg-linear-to-b from-black/40 via-black/20 to-black/60" />
+  <div className="absolute inset-0 -z-10 bg-linear-to-b from-black/40 via-black/20 to-black/60" />
 
-        <div className="flex flex-col h-full justify-center max-w-4xl mx-6 sm:mx-10 gap-3 text-[#4A3728] font-semibold">
-          <p className="inline-flex max-w-fit items-center rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs tracking-wide backdrop-blur-md">
-            NEW COLLECTION 2026
-          </p>
+  <div
+    className="
+      flex flex-col justify-center h-full
+      max-w-5xl
+      mx-5 sm:mx-10
+      gap-4
+      text-[#4A3728] font-semibold
+    "
+  >
+    <p className="inline-flex w-fit items-center rounded-full border border-white/20 bg-white/10 px-3 py-2 text-xs tracking-wide backdrop-blur-md">
+      NEW COLLECTION 2026
+    </p>
 
-          <h1
-            className="flex items-center font-bold tracking-tight leading-tight 
-                   text-3xl sm:text-4xl lg:text-7xl text-[#4A3728] my-2"
+    <h1
+      className="
+        flex flex-wrap items-center gap-2
+        tracking-tight leading-tight
+      "
+    >
+      <span className="font-bold text-2xl sm:text-4xl lg:text-7xl">
+        DESIGNED FOR
+      </span>
+
+      <LayoutTextFlip />
+    </h1>
+
+    <p className="text-sm sm:text-lg lg:text-xl max-w-xl">
+      More than clothing — it’s a statement of confidence, culture, and
+      individuality.
+    </p>
+
+    <Link href="/shop">
+      <button className="group relative overflow-hidden rounded-xl bg-[#d4af37] px-6 py-3 sm:px-7 sm:py-4 mt-4 text-black font-semibold shadow-lg w-fit">
+        <span className="relative z-10 flex items-center gap-3">
+          Shop Now
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            width={20}
+            height={20}
+            className="transition-transform group-hover:translate-x-1.5 duration-300"
           >
-            DESIGNED FOR
-            <LayoutTextFlip />
-          </h1>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M13.5 4.5L21 12L13.5 19.5M21 12H3"
+            />
+          </svg>
+        </span>
+        <span className="absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+      </button>
+    </Link>
 
-          <p className="my-3 text-base sm:text-lg lg:text-xl">
-            More than clothing — it’s a statement of confidence, culture, and
-            individuality.
-          </p>
+    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white hidden sm:block">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={1.5}
+        width={32}
+        height={32}
+        className="animate-bounce"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M12 3v14m0 0l-5-5m5 5l5-5"
+        />
+      </svg>
+    </div>
+  </div>
+</section>
 
-          <Link href="/shop">
-            <button className="group relative overflow-hidden rounded-xl bg-[#d4af37] px-7 py-4 mt-5 text-black font-semibold shadow-lg w-fit">
-              <span className="relative z-10 flex items-center gap-3">
-                Shop Now
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1.5}
-                  width={20}
-                  height={20}
-                  className="transition-transform group-hover:translate-x-1.5 duration-300"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12L13.5 19.5M21 12H3"
-                  />
-                </svg>
-              </span>
-              <span className="absolute inset-0 bg-white/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-            </button>
-          </Link>
-
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white hidden sm:block">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={1.5}
-              width={35}
-              height={35}
-              className="animate-bounce"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 3v14m0 0l-5-5m5 5l5-5"
-              />
-            </svg>
-          </div>
-        </div>
-      </section>
 
       <section className="min-h-screen bg-white px-6 sm:px-10 lg:px-20 py-16">
         <div className="flex flex-col items-center text-center">
@@ -341,10 +355,16 @@ export default function Home() {
                    px-4 py-4 w-full h-[280px] sm:h-[320px] lg:h-[360px] 
                    rounded-3xl text-white"
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-                style={{ backgroundImage: `url(${item.img})` }}
-              />
+             <div className="absolute inset-0 overflow-hidden rounded-3xl">
+  <Image
+    src={item.img}
+    alt={item.title}
+    fill
+    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+    className="object-cover transition-transform duration-500 group-hover:scale-110"
+  />
+</div>
+
 
               <div className="absolute inset-0 bg-black/30" />
 

@@ -10,13 +10,13 @@ export default function ReviewsCard({
   return (
     <div className="w-full max-w-sm bg-white rounded-2xl shadow-2xl p-6 flex flex-col gap-4">
       <div className="flex items-center gap-4">
-        <div className="w-14 h-14 rounded-full overflow-hidden">
+        <div className="relative w-14 h-14 rounded-full overflow-hidden">
           <Image
             src={profilePic}
             alt={name}
-            width={56}
-            height={56}
+            fill
             className="object-cover"
+            sizes="56px"
           />
         </div>
 
@@ -28,13 +28,9 @@ export default function ReviewsCard({
       <div className="flex items-center gap-1 text-yellow-400">
         {"★".repeat(Math.floor(rating))}
         {"☆".repeat(5 - Math.floor(rating))}
-        <span className="text-sm text-gray-600 ml-2">
-          {rating.toFixed(1)}
-        </span>
+        <span className="text-sm text-gray-600 ml-2">{rating.toFixed(1)}</span>
       </div>
-      <p className="text-gray-700 text-sm leading-relaxed">
-        “{comment}”
-      </p>
+      <p className="text-gray-700 text-sm leading-relaxed">“{comment}”</p>
     </div>
   );
 }
